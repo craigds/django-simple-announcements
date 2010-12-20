@@ -1,0 +1,12 @@
+{% if announcements %}
+<ul class="announcements">
+{% for announcement in announcements %}
+    <li class="announcement">
+        {{ announcement.message }}
+        {% if allow_dismiss %}
+            <a class="dismissLink" href="{% url 'announcements.views.dismiss_announcement' %}?next={{ request.get_full_path }}">Dismiss</a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
