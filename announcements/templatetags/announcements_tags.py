@@ -4,7 +4,7 @@ from announcements import defaults
 from django.template import Library
 from django.utils.safestring import mark_safe
 
-register = Library('announcements')
+register = Library()
 
 @register.simple_tag
 def dismiss_js_link(a):
