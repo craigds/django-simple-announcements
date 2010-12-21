@@ -1,7 +1,6 @@
 from announcements.models import Announcement
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 from django.utils import simplejson
 
 def announcements_json(request):
