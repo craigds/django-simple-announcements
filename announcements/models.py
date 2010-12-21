@@ -11,7 +11,7 @@ class AnnouncementManager(models.Manager):
         )
     
     def for_request(self, request):
-        cookie_name = getattr(settings, "ANNOUNCEMENTS_COOKIE", "announcements_dismiss")
+        cookie_name = getattr(settings, "ANNOUNCEMENTS_COOKIE_NAME", "announcements_dismiss")
         cookie = request.COOKIES.get(cookie_name, None)
         
         dismissed_pk = 0
