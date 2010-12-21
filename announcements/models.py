@@ -10,8 +10,16 @@ class AnnouncementManager(models.Manager):
             models.Q(date_end__gte=now) | models.Q(date_end__isnull=True)
         )
     
-    def for_session(self, session):
-        dismissed_pk = session.get('announcements_dismissed', 0)
+    def for_request(self, request):
+        cookie_name = getattr(settings, "ANNOUNCEMENTS_COOKIE", "announcements_dismiss")
+        cookie = request.COOKIES.get(cookie_name, None)
+        
+        dismissed_pk = 0
+        if cookie:
+            try:
+                dismissed_pk = int(cookie)
+            except ValueError:
+                pass
         
         qs = self.current().filter(pk__gt=dismissed_pk)
         qs = qs.order_by('-date_start')[:getattr(settings, 'ANNOUNCEMENTS_MAX', 1)]

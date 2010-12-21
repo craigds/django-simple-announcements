@@ -12,7 +12,7 @@ setup(
     author = 'Craig de Stigter',
     author_email = 'craig.ds@gmail.com',
     url = 'http://github.com/craigds/django-simple-announcements/',
-    packages=['announcements'],
+    packages=['announcements', 'announcements.templatetags'],
     package_data={'announcements': ['templates/announcements/*']},
     classifiers = ['Development Status :: 4 - Beta',
                    'Environment :: Web Environment',
