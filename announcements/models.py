@@ -1,5 +1,6 @@
 
 from datetime import datetime
+from django.conf import settings
 from django.db import models
 
 class AnnouncementManager(models.Manager):
@@ -23,6 +24,9 @@ class Announcement(models.Model):
             if self.date_end is None or self.date_end > now:
                 return True
         return False
+    
+    def can_dismiss(self):
+        return getattr(settings, "ANNOUNCEMENTS_DISMISSABLE", True)
     
     def __unicode__(self):
         return unicode(self.message)

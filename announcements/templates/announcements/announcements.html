@@ -3,8 +3,8 @@
 {% for announcement in announcements %}
     <li class="announcement">
         {{ announcement.message }}
-        {% if allow_dismiss %}
-            <a class="dismissLink" href="{% url 'announcements.views.dismiss_announcement' %}?next={{ request.get_full_path }}">Dismiss</a>
+        {% if announcement.can_dismiss %}
+            <a class="dismissLink" href="{% url announcements.views.dismiss_announcement object_id=announcement.pk %}?next={{ request.get_full_path }}">Dismiss</a>
         {% endif %}
     </li>
 {% endfor %}
