@@ -1,6 +1,6 @@
 
 from datetime import datetime
-from django.conf import settings
+from announcements import defaults
 from django.db import models
 
 class AnnouncementManager(models.Manager):
@@ -11,7 +11,7 @@ class AnnouncementManager(models.Manager):
         )
     
     def for_request(self, request):
-        cookie_name = getattr(settings, "ANNOUNCEMENTS_COOKIE_NAME", "announcements_dismiss")
+        cookie_name = defaults.ANNOUNCEMENTS_COOKIE_NAME
         cookie = request.COOKIES.get(cookie_name, None)
         
         dismissed_pk = 0
@@ -22,7 +22,7 @@ class AnnouncementManager(models.Manager):
                 pass
         
         qs = self.current().filter(pk__gt=dismissed_pk)
-        qs = qs.order_by('-date_start')[:getattr(settings, 'ANNOUNCEMENTS_MAX', 1)]
+        qs = qs.order_by('-date_start')[:defaults.ANNOUNCEMENTS_MAX]
         return qs
 
 class Announcement(models.Model):
@@ -41,7 +41,7 @@ class Announcement(models.Model):
         return False
     
     def can_dismiss(self):
-        return getattr(settings, "ANNOUNCEMENTS_DISMISSABLE", True)
+        return defaults.ANNOUNCEMENTS_DISMISSABLE
     
     def __unicode__(self):
         return unicode(self.message)
