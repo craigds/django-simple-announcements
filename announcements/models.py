@@ -1,6 +1,5 @@
 
 from datetime import datetime
-from announcements import defaults
 from django.db import models
 
 class AnnouncementManager(models.Manager):
@@ -11,6 +10,7 @@ class AnnouncementManager(models.Manager):
         )
     
     def for_request(self, request):
+        from announcements import defaults
         cookie_name = defaults.ANNOUNCEMENTS_COOKIE_NAME
         cookie = request.COOKIES.get(cookie_name, None)
         
@@ -41,6 +41,7 @@ class Announcement(models.Model):
         return False
     
     def can_dismiss(self):
+        from announcements import defaults
         return defaults.ANNOUNCEMENTS_DISMISSABLE
     
     def __unicode__(self):
