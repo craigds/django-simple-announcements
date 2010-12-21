@@ -9,6 +9,13 @@ class AnnouncementManager(models.Manager):
         return self.get_query_set().filter(date_start__lte=now).filter(
             models.Q(date_end__gte=now) | models.Q(date_end__isnull=True)
         )
+    
+    def for_session(self, session):
+        dismissed_pk = session.get('announcements_dismissed', 0)
+        
+        qs = self.current().filter(pk__gt=dismissed_pk)
+        qs = qs.order_by('-date_start')[:getattr(settings, 'ANNOUNCEMENTS_MAX', 1)]
+        return qs
 
 class Announcement(models.Model):
     message = models.CharField(max_length=255)
