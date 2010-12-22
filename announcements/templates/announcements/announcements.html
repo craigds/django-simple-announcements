@@ -3,6 +3,9 @@
 {% for announcement in announcements %}
     <div class="announcement">
         {{ announcement.message }}
+        {% if announcement.url %}
+            <a class="moreLink" href="{{ announcement.url }}">Read more</a>
+        {% endif %}
         {% if announcement.can_dismiss %}
             <a class="dismissLink" onclick="{% dismiss_js_link announcement %}">Dismiss</a>
         {% endif %}

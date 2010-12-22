@@ -27,6 +27,7 @@ class AnnouncementManager(models.Manager):
 
 class Announcement(models.Model):
     message = models.CharField(max_length=255)
+    url = models.URLField(null=False, blank=True, help_text="(Optional) - Link to a blog post with more information")
     date_created = models.DateTimeField(db_index=True, auto_now_add=True)
     date_start = models.DateTimeField(db_index=True)
     date_end = models.DateTimeField(db_index=True, null=True, blank=True)
@@ -40,9 +41,20 @@ class Announcement(models.Model):
                 return True
         return False
     
+    # for great justice. (and admin prettiness)
+    is_current.boolean = True
+    
     def can_dismiss(self):
         from announcements import defaults
         return defaults.ANNOUNCEMENTS_DISMISSABLE
     
     def __unicode__(self):
         return unicode(self.message)
+    
+    def to_json(self):
+        return {
+            'id': self.pk,
+            'message': self.message,
+            'url': self.url,
+            'can_dismiss': self.can_dismiss(),
+        }
