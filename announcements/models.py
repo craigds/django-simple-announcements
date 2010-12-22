@@ -27,7 +27,8 @@ class AnnouncementManager(models.Manager):
 
 class Announcement(models.Model):
     message = models.CharField(max_length=255)
-    url = models.URLField(null=False, blank=True, help_text="(Optional) - Link to a blog post with more information")
+    # verify_exists=False until this bugfix lands in Django: http://code.djangoproject.com/ticket/9857
+    url = models.URLField(null=False, blank=True, verify_exists=False, help_text="(Optional) - Link to a blog post with more information")
     date_created = models.DateTimeField(db_index=True, auto_now_add=True)
     date_start = models.DateTimeField(db_index=True)
     date_end = models.DateTimeField(db_index=True, null=True, blank=True)
