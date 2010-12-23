@@ -1,0 +1,11 @@
+{% load announcements_tags %}
+<div class="announcement">
+    {% if announcement.can_dismiss %}
+        <a class="dismissLink" onclick="{% dismiss_js_link announcement %}">Dismiss</a>
+    {% endif %}
+    {% if announcement.url %}
+        <a class="moreLink" href="{{ announcement.url }}">{{ announcement.message }}</a>
+    {% else %}
+        {{ announcement.message }}
+    {% endif %}
+</div>

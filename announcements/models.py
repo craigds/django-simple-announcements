@@ -52,10 +52,20 @@ class Announcement(models.Model):
     def __unicode__(self):
         return unicode(self.message)
     
+    def to_html(self):
+        from django.template import loader, Context
+        t = loader.get_template("announcements/announcement.html")
+        c = Context({
+            'announcement': self,
+        })
+        return t.render(c)
+    
     def to_json(self):
+        
         return {
             'id': self.pk,
             'message': self.message,
             'url': self.url,
             'can_dismiss': self.can_dismiss(),
+            'html': self.to_html(),
         }
