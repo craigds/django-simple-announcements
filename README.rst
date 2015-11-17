@@ -24,12 +24,18 @@ Getting started
 
 3. Copy or symlink ``media/js/announcements.js`` into your ``MEDIA_ROOT``.
 
-4. Do a db sync::
+4. Migrate::
     
-    python manage.py syncdb
+    django-admin migrate
 
 5. Include ``announcements/announcements.html`` somewhere, probably in your ``base`` template::
 
     {% include "announcements/announcements.html" %}
 
 6. Start announcing at ``/admin/announcements/announcement/``
+
+Requirements:
+-------------
+
+ * Python 2.7 or 3.3+
+ * Django 1.7+

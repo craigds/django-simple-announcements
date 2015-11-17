@@ -1,4 +1,5 @@
-from announcements.models import Announcement
+from .models import Announcement
+
 
 def announcements(request):
     return {

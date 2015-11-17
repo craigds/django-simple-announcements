@@ -1,5 +1,6 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import url
+from .views import announcements_json
 
-urlpatterns = patterns('announcements.views',
-    (r'^current/$', 'announcements_json'),
-)
+urlpatterns = [
+    url(r'^current/$', announcements_json),
+]

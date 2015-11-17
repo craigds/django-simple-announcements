@@ -1,16 +1,17 @@
-
 from datetime import datetime
 from django.db import models
+
+from . import defaults
+
 
 class AnnouncementManager(models.Manager):
     def current(self):
         now = datetime.now()
-        return self.get_query_set().filter(date_start__lte=now).filter(
+        return self.get_queryset().filter(date_start__lte=now).filter(
             models.Q(date_end__gte=now) | models.Q(date_end__isnull=True)
         )
 
     def for_request(self, request):
-        from announcements import defaults
         cookie_name = defaults.ANNOUNCEMENTS_COOKIE_NAME
         cookie = request.COOKIES.get(cookie_name, None)
 
@@ -45,7 +46,6 @@ class Announcement(models.Model):
     is_current.boolean = True
 
     def can_dismiss(self):
-        from announcements import defaults
         return defaults.ANNOUNCEMENTS_DISMISSABLE
 
     def __unicode__(self):

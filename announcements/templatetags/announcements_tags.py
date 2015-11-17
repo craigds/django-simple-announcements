@@ -1,8 +1,9 @@
 # calling this file announcements.py makes the namespace clash with the app :(
 
-from announcements import defaults
 from django.template import Library
 from django.utils.safestring import mark_safe
+
+from .. import defaults
 
 register = Library()
 

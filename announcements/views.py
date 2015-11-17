@@ -1,12 +1,13 @@
-from announcements.models import Announcement
+import json
 
 from django.http import HttpResponse
-from django.utils import simplejson
+
+from .models import Announcement
 
 def announcements_json(request):
     announcements = Announcement.objects.for_request(request)
-    
+
     return HttpResponse(
-        simplejson.dumps([a.to_json() for a in announcements], indent=2),
+        json.dumps([a.to_json() for a in announcements], indent=2),
         mimetype='application/json',
     )

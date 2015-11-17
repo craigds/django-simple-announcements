@@ -11,7 +11,7 @@ setup(
     version = version,
     author = 'Craig de Stigter',
     author_email = 'craig.ds@gmail.com',
-    url = 'http://github.com/craigds/django-simple-announcements/',
+    url = 'https://github.com/craigds/django-simple-announcements/',
     packages=['announcements', 'announcements.templatetags'],
     package_data={'announcements': ['templates/announcements/*']},
     classifiers = ['Development Status :: 4 - Beta',
