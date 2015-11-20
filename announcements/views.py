@@ -9,5 +9,5 @@ def announcements_json(request):
 
     return HttpResponse(
         json.dumps([a.to_json() for a in announcements], indent=2),
-        mimetype='application/json',
+        content_type='application/json',
     )
