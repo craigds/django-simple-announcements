@@ -1,4 +1,7 @@
 build
 dist
 *egg-info
+MANIFEST
+__pycache__
+*.pyc
 .*
