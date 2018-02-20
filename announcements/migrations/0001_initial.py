@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
 
 
 class Migration(migrations.Migration):
@@ -14,7 +15,7 @@ class Migration(migrations.Migration):
                 ('message', models.CharField(max_length=255)),
                 ('url', models.URLField(help_text=b'(Optional) - Link to a blog post with more information', blank=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('date_start', models.DateTimeField(db_index=True)),
+                ('date_start', models.DateTimeField(db_index=True, default=django.utils.timezone.now)),
                 ('date_end', models.DateTimeField(db_index=True, null=True, blank=True)),
             ],
         ),
